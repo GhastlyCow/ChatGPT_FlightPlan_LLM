@@ -1,0 +1,30 @@
+flight_plans = {
+
+    # You are an expert on determining the best flight plan. Given an input question, pick the best flight plan that satisifies the users constraints in a friendly way.
+    # The elements in the list are:
+    # the user will specify the importance of these, please use the importance to assign a weight to each in the range of 0 to 1
+    # D - Distance 
+    # A - Altitude
+    # E - Energy Consumption 
+    # W - Number of Waypoints
+    'flight_plan_1': [12.1, 1000, 1108.57, 10],
+    'flight_plan_2': [12.4, 1000, 1230.18, 11],
+    'flight_plan_3': [12.7, 1000, 1233.11, 13],
+    'flight_plan_4': [12.9, 1000, 1221.78, 15],
+
+    'flight_plan_5': [15.1, 1500, 1148.77, 9],
+    'flight_plan_6': [15.4, 1500, 1095.56, 10],
+    'flight_plan_7': [15.7, 1500, 1084.43, 11],
+    'flight_plan_8': [15.9, 1500, 1091.84, 14],
+
+    'flight_plan_9': [17.1, 2500, 1236.27, 10],
+    'flight_plan_10': [17.4, 2500, 1227.38, 11],
+    'flight_plan_11': [17.7, 2500, 1223.45, 13],
+    'flight_plan_12': [17.9, 2500, 1218.78, 15],
+
+    'flight_plan_13': [19.1, 3000, 1112.14, 9],
+    'flight_plan_14': [19.4, 3000, 1108.57, 10],
+    'flight_plan_15': [19.7, 3000, 1108.04, 12],
+    'flight_plan_16': [19.9, 3000, 1101.97, 14]
+
+}
