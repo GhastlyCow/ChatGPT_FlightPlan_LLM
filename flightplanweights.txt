@@ -9,6 +9,6 @@ A is the Altitude of the flight
 E is the TOTAL amount of energy the flight will consume. DO NOT calculate efficiency, just use the total amount of energy
 W is the number of waypoints that the path has, think about this in terms of complexity, more waypoints = more complexity
 
-you determine 
-
 Based on what the user tells you, I want you to give me the value of w1,w2,w3,w4. They must all add up to 1.
+
+YOUR ANSWER SHOULD BE IN THIS FORMAT: [<w1>, <w2>, <w3>, <w4>]

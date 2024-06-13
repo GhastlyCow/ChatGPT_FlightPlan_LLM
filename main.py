@@ -11,10 +11,11 @@ from langchain_core.prompts.few_shot import FewShotPromptTemplate
 from langchain_core.prompts.prompt import PromptTemplate
 import sys
 
+__author__ = "Pranav Gupta"
 
 llm = ChatOpenAI(model="gpt-3.5-turbo-0125")
 
-loader = TextLoader("flightplans.txt")
+loader = TextLoader("flightplanweights.txt")
 docs = loader.load()
 
 text_splitter = RecursiveCharacterTextSplitter(
@@ -114,6 +115,85 @@ examples = [
 ]
 
 
+weightedexamples = [
+
+        {
+        "question": "I want to travel the shortest distance at the lowest altitude",
+        "context": "{context}",
+        "answer": """
+        Are follow up questions needed here: Yes.
+        Follow up: What categories does the user seem to care about?
+        Intermediate Answer: 
+        Distance and Altitude
+        Follow up: Did they place importance on one or do they care about both equally?
+        Intermediate Answer:
+        Both equally
+        So the final answer is [0.5,0.5,0,0]
+        """,
+    },
+    {
+        "question": "I am low on fuel",
+        "context": "{context}",
+        "answer": """
+        Are follow up questions needed here: Yes.
+        Follow up: What categories does the user seem to care about?
+        Intermediate Answer: 
+        Energy Consumption
+        Follow up: Did they place importance on one or do they care about both equally?
+        Intermediate Answer:
+        They only care about one thing
+        So the final answer is [0,0,1,0]
+        """,
+    },
+     {
+        "question": "I want to use the least amount of energy while traveling the longest distance",
+        "context": "{context}",
+        "answer": """
+        Are follow up questions needed here: Yes.
+        Follow up: What categories does the user seem to care about?
+        Intermediate Answer: 
+        Energy Consumption and Distance
+        Follow up: Did they place importance on one or do they care about both equally?
+        Intermediate Answer:
+        both equally
+        So the final answer is [0.5, 0, 0,5, 0]
+        """,
+    },
+    {
+        "question": "I hate complicated paths and I want to travel at a low altitude",
+        "context": "{context}",
+        "answer": """
+        Are follow up questions needed here: Yes.
+        Follow up: What does complicated or complex mean?
+        Intermediate Answer: complicated or compelx means waypoints.
+        Follow up: What categories does the user seem to care about?
+        Intermediate Answer: 
+        Waypoints and altitude
+        Follow up: Did they place importance on one or do they care about both equally?
+        Intermediate Answer:
+        They said they hate complicated paths, so that is more important
+        So the final answer is [0, 0.3, 0, 0.7]
+        """,
+    },
+    {
+        "question": "I want to take a moderately complex path that is at the highest altitude and really uses the least energy.",
+        "context": "{context}",
+        "answer": """
+        Are follow up questions needed here: Yes.
+        Follow up: What does complex mean?
+        Intermediate Answer: complex means waypoints.
+        Follow up: What categories does the user seem to care about?
+        Intermediate Answer:
+        Waypoints, Altitude, Energy Consumption
+        Follow up: Did they place importance on one or do they care about them equally?
+        Intermediate Answer: 
+        The use of really implies they care about energy consumption slightly more than waypoints and altitude
+        So the final answer is [0,0.3,0.4,0.3]
+        """,
+    },
+
+]
+
 example_prompt = PromptTemplate(
     input_variables=["question", "context", "answer"], template="Question: {question}\n{answer}"
 )
@@ -125,12 +205,19 @@ fsprompt = FewShotPromptTemplate(
     input_variables=["question", "context"],
 )
 
+weighted_fsprompt = FewShotPromptTemplate(
+    examples=weightedexamples,
+    example_prompt=example_prompt,
+    suffix="Question: {question} {context}",
+    input_variables=["question", "context"],
+)
+
 prompt = hub.pull("rlm/rag-prompt")
 
 
 rag_chain = (
     {"context": retriever | format_docs, "question": RunnablePassthrough()}
-    | fsprompt
+    | weighted_fsprompt
     | llm
     | StrOutputParser()
     )
