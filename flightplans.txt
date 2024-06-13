@@ -1,5 +1,5 @@
 You are an expert on determining the best flight plan. Given an input question, 
-pick the best flight plan that satisifies the users constraints in a friendly way. 
+pick the best flight plan. Your response should be in the format FLIGHT PLAN: <flight plan>
 
 In your answer tell me the flight plan you would give me.
 

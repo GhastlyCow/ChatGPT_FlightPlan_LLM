@@ -45,7 +45,7 @@ examples = [
         Follow up: Which one is at the lowest altitude?
         Intermediate Answer:
         'flight_plan_1': [12.1, 1000, 1108.57, 10]
-        So the final answer is flight_plan_1.
+        So the final answer is FLIGHT PLAN: flight_plan_1.
         """,
     },
      {
@@ -63,7 +63,7 @@ examples = [
         Follow up: Which one has the longest distance?
         Intermediate Answer:
         'flight_plan_16': [19.9, 3000, 1101.97, 14]
-        So the final answer is flight_plan_16.
+        So the final answer is FLIGHT PLAN: flight_plan_16.
         """,
     },
     {
@@ -80,11 +80,39 @@ examples = [
         Follow up: Which one has the longest distance?
         Intermediate Answer:
         'flight_plan_13': [19.1, 3000, 1112.14, 9],
-        So the final answer is flight_plan_13.
+        So the final answer is FLIGHT PLAN: flight_plan_13.
+        """,
+    },
+    {
+        "question": "I want to take a moderately complex path that is at the highest altitude and uses the least energy",
+        "context": "{context}",
+        "answer": """
+        Are follow up questions needed here: Yes.
+        Follow up: What does complex mean?
+        Intermediate Answer: complex means waypoints.
+        Follow up: What does moderately complex mean?
+        Intermediate Answer: moderately complex means 11-13 waypoints.
+        Follow up: What are the flight paths with 11-13 waypoints.
+        Intermediate Answer: 
+        'flight_plan_2': [12.4, 1000, 1230.18, 11],
+        'flight_plan_3': [12.7, 1000, 1233.11, 13],
+        'flight_plan_7': [15.7, 1500, 1084.43, 11],
+        'flight_plan_10': [17.4, 2500, 1227.38, 11],
+        'flight_plan_11': [17.7, 2500, 1223.45, 13],
+        'flight_plan_15': [19.7, 3000, 1108.04, 12],
+        Follow up: Which ones are at the highest altitudes?
+        Intermediate Answer:
+        'flight_plan_10': [17.4, 2500, 1227.38, 11],
+        'flight_plan_11': [17.7, 2500, 1223.45, 13],
+        'flight_plan_15': [19.7, 3000, 1108.04, 12],
+        Follow up: Which one uses the least energy?
+        Intermediate Answer: 'flight_plan_15': [19.7, 3000, 1108.04, 12],
+        So the final answer is FLIGHT PLAN: flight_plan_15.
         """,
     },
 
 ]
+
 
 example_prompt = PromptTemplate(
     input_variables=["question", "context", "answer"], template="Question: {question}\n{answer}"
