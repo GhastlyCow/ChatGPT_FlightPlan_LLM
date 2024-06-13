@@ -7,6 +7,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+import sys
 
 flight_plans = {
 
@@ -54,16 +55,22 @@ retriever = vectorstore.as_retriever(search_kwargs={"k": 2}) # search_type="simi
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
-# template = """Use the following pieces of context to answer the question at the end.
-# If you don't know the answer, just say that you don't know, don't try to make up an answer.
-# Use three sentences maximum and keep the answer as concise as possible.
-# Always say "thanks for asking!" at the end of the answer.
+template = """You are an expert on determining the best flight plan. Given an input question, determine e a score for 
+    each flight plan: S(F*P) = w1*D + w2*A + w3*E + w4*W
+    where 
+    D - Distance 
+    A - Altitude
+    E - Energy Consumption 
+    W - Number of Waypoints
+    And w1,w2,w3,w4 signify the weights of each category, which is a value between 0 to 1.
+    You will pick what are the weights (which range from 0 to 1) based on the users prompt. The weights should add up to 1. YOUR RESPONSE SHOULD BE IN 
+    THIS FORMAT =[w1, w2, w3, w4]. 
 
-# {context}
+{context}
 
-# Question: {question}
+Question: {question}
 
-# Helpful Answer:"""
+Helpful Answer:"""
 # custom_rag_prompt = PromptTemplate.from_tempate(template)
 prompt = hub.pull("rlm/rag-prompt")
 
@@ -75,6 +82,15 @@ rag_chain = (
     | StrOutputParser()
 )
 
-for chunk in rag_chain.stream("We want to use the least amount of fuel for our flight, also give me the weights you assigned to each category"):
-    print(chunk, end="", flush=True)
-# rag_chain.invoke("Which flight should i choose if I want to be at 1500 altitude and use the least amount of energy?")
+while True:
+    query = input("Question: ")
+
+    if query in ['quit', 'q', 'exit']:
+        sys.exit()
+    
+    for chunk in rag_chain.stream(query):
+        print(chunk, end="", flush=True)
+    
+    print('\n')
+
+# rag_chain.invoke("We want to use the least amount of fuel for our flight and we don't care about anything else, also give me the weights you assigned to each category")

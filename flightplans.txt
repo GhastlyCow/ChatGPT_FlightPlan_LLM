@@ -5,7 +5,7 @@ flight_plans = {
     # the user will specify the importance of these, please use the importance to assign a weight to each in the range of 0 to 1
     # D - Distance 
     # A - Altitude
-    # E - Energy Consumption 
+    # E - Energy Consumption (this is the efficiency already)
     # W - Number of Waypoints
     'flight_plan_1': [12.1, 1000, 1108.57, 10],
     'flight_plan_2': [12.4, 1000, 1230.18, 11],
