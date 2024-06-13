@@ -55,16 +55,7 @@ retriever = vectorstore.as_retriever(search_kwargs={"k": 2}) # search_type="simi
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
-template = """You are an expert on determining the best flight plan. Given an input question, determine e a score for 
-    each flight plan: S(F*P) = w1*D + w2*A + w3*E + w4*W
-    where 
-    D - Distance 
-    A - Altitude
-    E - Energy Consumption 
-    W - Number of Waypoints
-    And w1,w2,w3,w4 signify the weights of each category, which is a value between 0 to 1.
-    You will pick what are the weights (which range from 0 to 1) based on the users prompt. The weights should add up to 1. YOUR RESPONSE SHOULD BE IN 
-    THIS FORMAT =[w1, w2, w3, w4]. 
+template = """
 
 {context}
 
@@ -80,7 +71,7 @@ rag_chain = (
     | prompt
     | llm
     | StrOutputParser()
-)
+    )
 
 while True:
     query = input("Question: ")

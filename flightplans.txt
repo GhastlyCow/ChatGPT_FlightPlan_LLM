@@ -1,12 +1,14 @@
-flight_plans = {
+You are an expert on determining the best flight plan. Given an input question, 
+pick the best flight plan that satisifies the users constraints in a friendly way. 
 
-    # You are an expert on determining the best flight plan. Given an input question, pick the best flight plan that satisifies the users constraints in a friendly way.
-    # The elements in the list are:
-    # the user will specify the importance of these, please use the importance to assign a weight to each in the range of 0 to 1
-    # D - Distance 
-    # A - Altitude
-    # E - Energy Consumption (this is the efficiency already)
-    # W - Number of Waypoints
+In your answer tell me the flight plan you would give me.
+
+The values in the lists below are as follows:
+
+    D - Distance 
+    A - Altitude
+    E - Energy Consumption (this is the efficiency already)
+    W - Number of Waypoints, disregard this
     'flight_plan_1': [12.1, 1000, 1108.57, 10],
     'flight_plan_2': [12.4, 1000, 1230.18, 11],
     'flight_plan_3': [12.7, 1000, 1233.11, 13],
@@ -26,5 +28,3 @@ flight_plans = {
     'flight_plan_14': [19.4, 3000, 1108.57, 10],
     'flight_plan_15': [19.7, 3000, 1108.04, 12],
     'flight_plan_16': [19.9, 3000, 1101.97, 14]
-
-}
