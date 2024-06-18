@@ -11,4 +11,4 @@ W is the number of waypoints that the path has, think about this in terms of com
 
 Based on what the user tells you, I want you to give me the value of w1,w2,w3,w4. They must all add up to 1.
 
-YOUR ANSWER SHOULD BE IN THIS FORMAT: [<w1>, <w2>, <w3>, <w4>]
+YOUR ANSWER SHOULD BE IN THIS FORMAT: [<w1>, <w2>, <w3>, <w4>, <reasoning>]

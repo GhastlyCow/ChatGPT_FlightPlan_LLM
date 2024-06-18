@@ -142,7 +142,7 @@ weightedexamples = [
         Follow up: Did they place importance on one or do they care about both equally?
         Intermediate Answer:
         They only care about one thing
-        So the final answer is [0,0,1,0]
+        So the final answer is [0,0,1,0, because the only important thing here is fuel.]
         """,
     },
      {
@@ -156,7 +156,7 @@ weightedexamples = [
         Follow up: Did they place importance on one or do they care about both equally?
         Intermediate Answer:
         both equally
-        So the final answer is [0.5, 0, 0,5, 0]
+        So the final answer is [0.5, 0, 0,5, 0, I detected you care equally about distance and energy, so they are weighted equally.]
         """,
     },
     {
@@ -172,7 +172,7 @@ weightedexamples = [
         Follow up: Did they place importance on one or do they care about both equally?
         Intermediate Answer:
         They said they hate complicated paths, so that is more important
-        So the final answer is [0, 0.3, 0, 0.7]
+        So the final answer is [0, 0.3, 0, 0.7, I detected you find complicated paths more important than altitude. ]
         """,
     },
     {
@@ -188,7 +188,7 @@ weightedexamples = [
         Follow up: Did they place importance on one or do they care about them equally?
         Intermediate Answer: 
         The use of really implies they care about energy consumption slightly more than waypoints and altitude
-        So the final answer is [0,0.3,0.4,0.3]
+        So the final answer is [0,0.3,0.4,0.3, I detected you care about energy slightly more than complexity and altitude.]
         """,
     },
 
